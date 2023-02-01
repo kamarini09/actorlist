@@ -8,13 +8,26 @@
     <title>Actorlist</title>
   </head>
   <body>
-    <section id="actors">
-      <h2>Actorlist</h2>
-      <template id="actorlist">
-        <p class="fullname">Name</p>
-        <p class="movie">Movie</p>
-      </template>
-    </section>
+    <main>
+      <h1>Actorlist</h1>
+      <section id="actors">
+        <template id="actorlist">
+          <div class="list">
+            <h3 class="fullname">Name</h3>
+            <p class="movie">Movie</p>
+            <br />
+          </div>
+        </template>
+      </section>
+
+      <div id="pop-up" class="hidden">
+        <div class="modal">
+          <h2>name</h2>
+          <p id="info">bla bla</p>
+          <button>close</button>
+        </div>
+      </div>
+    </main>
   </body>
   <script src="script.js"></script>
 </html>

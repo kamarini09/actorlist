@@ -1,27 +1,39 @@
-window.addEventListener("load", setup);
-let endpoint = actors.json;
+const open = document.querySelector("section");
+const container = document.getElementById('pop-up');
+const close = document.querySelector("button");
+
+open.addEventListener('click', () => {
+  container.classList.remove('hidden');
+
+})
+
+close.addEventListener('click', () => {
+  container.classList.add('hidden');
+
+})
 
 
-function setup() {
-  getActors(); 
+
+fetch("actors.json")
+  .then((res) => res.json())
+  .then((data) => ActorsList(data));
+
+
+function ActorsList(data) {
+  console.log(data);
+  data.forEach(showActor);
 }
 
+function showActor(actor) {
+  
+  const template = document.querySelector("template#actorlist").content;
+  const clone = template.cloneNode(true);
+  
+  clone.querySelector(".fullname").textContent = actor.fullname;
+  clone.querySelector(".movie").textContent = actor.movie;
+  // clone.querySelector("p.info").textContent = actor.info;
+ 
+  const parent = document.querySelector("section#actors");
 
-function getActors() {
-  console.log(endpoint);
-  fetch(endpoint)
-  .then(res => res.json())
-  .then(setupActors);
-}
-
-function setupActors(catArray){
-  console.log(catArray)
-  const template = document.querySelector("#actorlist").content;
-  const parentElement = document.querySelector("ul.images");
-  catArray.forEach(product => {
-      const copy = template.cloneNode(true);
-      copy.querySelector(".fullname").textContent= `${product.fullname}`;
-      copy.querySelector(".movie").textContent= `${product.name}`;
-      parentElement.appendChild(copy);
-  });
+  parent.appendChild(clone);
 }
